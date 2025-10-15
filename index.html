@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ConnectZap — Plataforma de Mensageria WhatsApp para Empresas</title>
+  <meta name="description" content="Automatize atendimento e mensagens transacionais pelo WhatsApp com segurança, LGPD e alta entregabilidade. Gere leads e feche mais negócios com a ConnectZap." />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="icon" href="https://i.imgur.com/WvCYX1x.png" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="ConnectZap — Mensageria WhatsApp para Empresas" />
+  <meta property="og:description" content="Automatize atendimento e mensagens transacionais com LGPD, templates aprovados e métricas em tempo real." />
+  <meta property="og:image" content="https://i.imgur.com/WvCYX1x.png" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.seu-dominio.com.br/" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --brand:#0ea5e9; /* sky-500 */
+      --brand-dark:#0284c7; /* sky-600 */
+      --ink:#0f172a; /* slate-900 */
+    }
+    .glass { backdrop-filter: blur(8px); background: rgba(255,255,255,.7);}  
+    .card { background:#fff; border:1px solid #e5e7eb; border-radius:16px; }
+    .shadow-soft { box-shadow: 0 10px 30px rgba(2, 132, 199, .08);} 
+    .tick::before { content:""; width:18px; height:18px; border-radius:999px; display:inline-block; margin-right:10px; background:linear-gradient(135deg, var(--brand), var(--brand-dark)); }
+  </style>
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "ConnectZap",
+    "url": "",
+    "logo": "https://i.imgur.com/WvCYX1x.png",
+    "contactPoint": [{
+      "@type": "ContactPoint",
+      "telephone": "+55-61-99374-2606",
+      "contactType": "customer support",
+      "areaServed": "BR",
+      "availableLanguage": ["Portuguese", "English"]
+    }]
+  }
+  </script>
+</head>
+<body class="bg-slate-50 text-slate-800">
+  <!-- Cookie/LGPD Banner -->
+  <div id="lgpd-banner" class="hidden fixed inset-x-0 bottom-0 z-50">
+    <div class="mx-auto max-w-6xl m-4 p-4 card shadow-soft">
+      <div class="flex flex-col md:flex-row md:items-center gap-3">
+        <p class="text-sm md:flex-1">Usamos cookies para melhorar sua experiência, medir audiência e oferecer conteúdo relevante. Ao continuar, você concorda com nossa <a href="#privacidade" class="text-sky-600 underline">Política de Privacidade</a>.</p>
+        <div class="flex gap-2">
+          <button id="lgpd-accept" class="px-4 py-2 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700">Rejeitar</button>
+          <button id="lgpd-consent" class="px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 text-white">Aceitar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+      <a href="#" class="flex items-center gap-2">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 1 1 16 0c0 3.532-2.036 6.63-5 7.93V22l-3.2-1.8A8 8 0 0 1 4 12Z" fill="url(#g)"/><defs><linearGradient id="g" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stop-color="#0ea5e9"/><stop offset="1" stop-color="#0284c7"/></linearGradient></defs></svg>
+        <span class="font-semibold text-slate-900">ConnectZap</span>
+      </a>
+      <nav class="hidden md:flex items-center gap-6 text-sm">
+        <a href="#recursos" class="hover:text-sky-700">Recursos</a>
+        <a href="#como-funciona" class="hover:text-sky-700">Como funciona</a>
+        <a href="#precos" class="hover:text-sky-700">Planos</a>
+        <a href="#contato" class="hover:text-sky-700">Contato</a>
+      </nav>
+      <a href="#lead" class="px-4 py-2 rounded-lg bg-sky-600 hover:bg-sky-700 text-white text-sm shadow-soft">Começar agora</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-sky-50 via-sky-100 to-white"></div>
+    <div class="relative max-w-6xl mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-10 items-center">
+      <div>
+        <h1 class="text-3xl md:text-5xl font-extrabold leading-tight text-slate-900">Mensageria WhatsApp para empresas: <span class="text-sky-600">conversas que viram negócios</span>.</h1>
+        <p class="mt-4 text-slate-600 text-lg">Atendimento, mensagens transacionais e campanhas com templates aprovados, métricas em tempo real e conformidade com a LGPD.</p>
+        <ul class="mt-6 space-y-2 text-slate-700">
+          <li class="tick">Infra oficial (Cloud API), alta entregabilidade</li>
+          <li class="tick">Opt-in e opt-out claros, política de privacidade</li>
+          <li class="tick">Fila de atendimento, agentes e chatbot</li>
+        </ul>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#lead" class="px-5 py-3 rounded-xl bg-sky-600 hover:bg-sky-700 text-white shadow-soft">Agendar demonstração</a>
+          <a href="#recursos" class="px-5 py-3 rounded-xl border border-slate-300 hover:bg-white">Explorar recursos</a>
+        </div>
+        <div class="mt-6 text-xs text-slate-500">CNPJ: 54.135.952/0001-41 • Atendimento: seg–sex, 9h–18h (BRT)</div>
+      </div>
+      <div>
+        <div class="card p-4 md:p-6 shadow-soft">
+          <img src="https://i.imgur.com/VoxxsRE.png" alt="Painel ConnectZap" class="rounded-lg w-full" />
+          <div class="mt-4 grid grid-cols-3 gap-4 text-center">
+            <div class="p-3 rounded-lg bg-slate-50">
+              <div class="text-xl font-bold">99%</div>
+              <div class="text-xs text-slate-500">Conversas inbound</div>
+            </div>
+            <div class="p-3 rounded-lg bg-slate-50">
+              <div class="text-xl font-bold">24h</div>
+              <div class="text-xs text-slate-500">Janela de sessão</div>
+            </div>
+            <div class="p-3 rounded-lg bg-slate-50">
+              <div class="text-xl font-bold">LGPD</div>
+              <div class="text-xs text-slate-500">Conformidade</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust Row -->
+  <section class="py-6 border-y bg-white">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-xs text-slate-500 items-center">
+      <div class="flex items-center gap-2"><span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span> SSL Ativo</div>
+      <div class="flex items-center gap-2"><span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span> Domínio verificado no BM</div>
+      <div class="flex items-center gap-2"><span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span> Templates aprovados</div>
+      <div class="flex items-center gap-2"><span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span> Opt-out simples</div>
+    </div>
+  </section>
+
+  <!-- Recursos -->
+  <section id="recursos" class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Recursos que importam</h2>
+      <p class="mt-2 text-slate-600">Tudo para operar com eficiência e segurança, do primeiro contato à conversão.</p>
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <div class="card p-6">
+          <h3 class="font-semibold text-slate-900">Atendimento e filas</h3>
+          <p class="mt-2 text-sm text-slate-600">Distribuição por agente, transbordo, SLAs e registros de conversa com indicadores.</p>
+        </div>
+        <div class="card p-6">
+          <h3 class="font-semibold text-slate-900">Templates & sessão 24h</h3>
+          <p class="mt-2 text-sm text-slate-600">Envios com modelos aprovados e mensagens de sessão com contexto e consentimento.</p>
+        </div>
+        <div class="card p-6">
+          <h3 class="font-semibold text-slate-900">Relatórios e logs</h3>
+          <p class="mt-2 text-sm text-slate-600">Entrega, leitura, qualidade, bloqueios e auditoria completa exportável.</p>
+        </div>
+        <div class="card p-6">
+          <h3 class="font-semibold text-slate-900">Integrações</h3>
+          <p class="mt-2 text-sm text-slate-600">APIs REST, webhooks, e conectores para CRM/ERP. Infra oficial Meta Cloud.</p>
+        </div>
+        <div class="card p-6">
+          <h3 class="font-semibold text-slate-900">LGPD by design</h3>
+          <p class="mt-2 text-sm text-slate-600">Políticas transparentes, opt-in/opt-out, minimização de dados e retenção controlada.</p>
+        </div>
+        <div class="card p-6">
+          <h3 class="font-semibold text-slate-900">Segurança</h3>
+          <p class="mt-2 text-sm text-slate-600">Criptografia em trânsito, segregação de escopos e controle de acesso por função.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Como funciona -->
+  <section id="como-funciona" class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Como funciona</h2>
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <div class="card p-6">
+          <div class="text-sky-600 text-sm font-semibold">1. Conecte</div>
+          <h3 class="mt-1 font-semibold">Número & Webhooks</h3>
+          <p class="mt-2 text-sm text-slate-600">Registramos seu número na Cloud API, validamos domínio e habilitamos webhooks.</p>
+        </div>
+        <div class="card p-6">
+          <div class="text-sky-600 text-sm font-semibold">2. Configure</div>
+          <h3 class="mt-1 font-semibold">Templates & Fluxos</h3>
+          <p class="mt-2 text-sm text-slate-600">Templates de boas-vindas, confirmação e status. Fluxos do agente virtual.</p>
+        </div>
+        <div class="card p-6">
+          <div class="text-sky-600 text-sm font-semibold">3. Converta</div>
+          <h3 class="mt-1 font-semibold">Leads & Relatórios</h3>
+          <p class="mt-2 text-sm text-slate-600">Formulários com consentimento, CRM integrado e painéis de performance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Planos simples -->
+  <section id="precos" class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Planos pensados para escalar</h2>
+      <div class="mt-8 grid md:grid-cols-3 gap-6">
+        <div class="card p-6">
+          <h3 class="font-semibold">Start</h3>
+          <p class="text-sm text-slate-600">Para validar seu canal</p>
+          <div class="mt-4 text-2xl font-bold">R$ 199<span class="text-sm font-normal text-slate-500">/mês</span></div>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li class="tick">1 número WhatsApp</li>
+            <li class="tick">Templates essenciais</li>
+            <li class="tick">Relatórios básicos</li>
+          </ul>
+          <a href="#lead" class="mt-6 inline-block px-4 py-2 rounded-lg bg-slate-900 text-white">Começar</a>
+        </div>
+        <div class="card p-6 ring-2 ring-sky-500">
+          <div class="text-xs uppercase text-sky-600">Recomendado</div>
+          <h3 class="font-semibold">Pro</h3>
+          <p class="text-sm text-slate-600">Para operação diária</p>
+          <div class="mt-4 text-2xl font-bold">R$ 499<span class="text-sm font-normal text-slate-500">/mês</span></div>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li class="tick">Até 3 números</li>
+            <li class="tick">Dashboards e exportações</li>
+            <li class="tick">Suporte prioritário</li>
+          </ul>
+          <a href="#lead" class="mt-6 inline-block px-4 py-2 rounded-lg bg-sky-600 text-white">Falar com vendas</a>
+        </div>
+        <div class="card p-6">
+          <h3 class="font-semibold">Enterprise</h3>
+          <p class="text-sm text-slate-600">Customizado para escala</p>
+          <div class="mt-4 text-2xl font-bold">Sob consulta</div>
+          <ul class="mt-4 space-y-2 text-sm">
+            <li class="tick">Múltiplas WABAs</li>
+            <li class="tick">SLAs & onboarding</li>
+            <li class="tick">Integração dedicada</li>
+          </ul>
+          <a href="#contato" class="mt-6 inline-block px-4 py-2 rounded-lg border border-slate-300">Solicitar proposta</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lead Form -->
+  <section id="lead" class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-10 items-start">
+      <div>
+        <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Vamos conversar?</h2>
+        <p class="mt-2 text-slate-600">Preencha o formulário e nossa equipe entra em contato. Seu consentimento é necessário para receber comunicações.</p>
+        <ul class="mt-6 space-y-2 text-slate-700 text-sm">
+          <li class="tick">Resposta em até 1 dia útil</li>
+          <li class="tick">Demonstração guiada</li>
+          <li class="tick">Análise do seu caso</li>
+        </ul>
+        <div class="mt-8 p-4 rounded-lg bg-slate-50 text-xs text-slate-500">
+          Ao enviar, você concorda com nossa <a href="#privacidade" class="text-sky-600 underline">Política de Privacidade</a> e permite contato por e-mail e WhatsApp. Você pode revogar a qualquer momento.
+        </div>
+      </div>
+      <form id="lead-form" class="card p-6 shadow-soft" method="post" action="https://formspree.io/f/mjkajpgg" novalidate>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="text-sm text-slate-600">Nome completo</label>
+            <input name="nome" required class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2" placeholder="Seu nome" />
+          </div>
+          <div>
+            <label class="text-sm text-slate-600">E-mail corporativo</label>
+            <input name="email" type="email" required class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2" placeholder="voce@empresa.com.br" />
+          </div>
+          <div>
+            <label class="text-sm text-slate-600">Telefone (WhatsApp)</label>
+            <input name="telefone" required class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2" placeholder="(61) 9 9999-9999" />
+          </div>
+          <div>
+            <label class="text-sm text-slate-600">Empresa</label>
+            <input name="empresa" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2" placeholder="Razão social ou marca" />
+          </div>
+          <div class="md:col-span-2">
+            <label class="text-sm text-slate-600">Como podemos ajudar?</label>
+            <select name="interesse" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2">
+              <option>Atendimento pelo WhatsApp</option>
+              <option>Automação/Chatbot</option>
+              <option>Mensagens transacionais</option>
+              <option>Integração com CRM/ERP</option>
+              <option>Outros</option>
+            </select>
+          </div>
+          <div class="md:col-span-2">
+            <label class="text-sm text-slate-600">Mensagem</label>
+            <textarea name="mensagem" rows="4" class="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2" placeholder="Conte-nos sobre a sua operação"></textarea>
+          </div>
+          <div class="flex items-start gap-2 md:col-span-2">
+            <input id="consent" type="checkbox" required class="mt-1" />
+            <label for="consent" class="text-xs text-slate-600">Autorizo o contato por e-mail/WhatsApp e confirmo que li a Política de Privacidade.</label>
+          </div>
+          <div class="md:col-span-2">
+            <!-- Placeholder de reCAPTCHA -->
+            <div class="rounded-lg border border-dashed border-slate-300 p-4 text-center text-xs text-slate-500">reCAPTCHA aqui (opcional)</div>
+          </div>
+        </div>
+        <button class="mt-6 w-full px-4 py-3 rounded-xl bg-slate-900 text-white">Enviar</button>
+        <p id="lead-msg" class="hidden mt-3 text-sm"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- FAQ LGPD & Conformidade -->
+  <section class="py-16">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-3xl font-bold text-slate-900">Privacidade e Conformidade</h2>
+      <div class="mt-6 grid md:grid-cols-2 gap-6">
+        <div class="card p-6">
+          <h3 class="font-semibold">Como tratamos seus dados?</h3>
+          <p class="mt-2 text-sm text-slate-600">Minimizamos coleta, usamos apenas para finalidades legítimas e armazenamos pelo tempo necessário. Você pode solicitar correção ou exclusão.</p>
+        </div>
+        <div class="card p-6">
+          <h3 class="font-semibold">Opt-in e opt-out</h3>
+          <p class="mt-2 text-sm text-slate-600">Só nos comunicamos mediante consentimento. Para sair, responda “PARAR” no WhatsApp ou use nossos canais de contato.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato/rodapé -->
+  <section id="contato" class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8">
+      <div class="md:col-span-2">
+        <h3 class="text-xl font-semibold text-slate-900">Fale com a gente</h3>
+        <p class="mt-2 text-slate-600 text-sm">E-mail: <a href="mailto:jou.castrosousa@gmail.com.br" class="text-sky-600">suporte@seu-dominio.com.br</a> • Telefone: (61) 99999-9999</p>
+        <p class="mt-1 text-slate-600 text-sm">Brasília/DF</p>
+      </div>
+      <div class="card p-6">
+        <h4 class="font-semibold">Políticas</h4>
+        <ul class="mt-2 space-y-1 text-sm">
+          <li><a id="privacidade" href="https://joubertcastro.github.io/ConnectZap/Politica_de_privacidade.html" class="text-sky-600">Política de Privacidade</a></li>
+          <li><a href="https://joubertcastro.github.io/ConnectZap/Termos_de_Servico.html" class="text-sky-600">Termos de Uso</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="max-w-6xl mx-auto px-4 py-6 border-t text-xs text-slate-500">
+      © <span id="year"></span> ConnectZap • CNPJ 54.135.952/0001-41 • Todos os direitos reservados.
+    </div>
+  </section>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/5561993742606" target="_blank" class="fixed right-4 bottom-20 md:bottom-6 z-40 rounded-full p-4 bg-emerald-500 hover:bg-emerald-600 text-white shadow-soft" aria-label="Falar no WhatsApp">
+    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M20.52 3.48A11.94 11.94 0 0 0 12.01 0 11.99 11.99 0 0 0 1.2 16.8L0 24l7.36-1.93A11.99 11.99 0 0 0 24 12c0-3.2-1.25-6.21-3.48-8.52ZM12 21.6c-1.92 0-3.72-.56-5.24-1.52l-.38-.23-4.36 1.14 1.14-4.36-.23-.38A9.53 9.53 0 1 1 21.54 12c0 5.28-4.26 9.6-9.54 9.6Zm5.52-7.32c-.3-.15-1.8-.88-2.08-.98-.28-.1-.48-.15-.68.15-.2.3-.78.98-.96 1.18-.18.2-.36.23-.66.08-1.8-.9-2.98-1.6-4.16-3.63-.32-.55.32-.51.92-1.71.1-.2.05-.38-.03-.53-.08-.15-.68-1.63-.93-2.23-.24-.58-.48-.5-.66-.5h-.56c-.18 0-.46.06-.7.33-.24.26-.92.9-.92 2.2 0 1.3.94 2.55 1.07 2.73.14.18 1.86 2.83 4.5 3.97.63.27 1.12.43 1.5.55.63.2 1.2.17 1.65.1.5-.08 1.54-.63 1.76-1.25.22-.62.22-1.15.15-1.25-.06-.1-.27-.16-.57-.3Z"/></svg>
+  </a>
+
+  <!-- Scripts -->
+  <script>
+    // Ano dinâmico
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Banner LGPD simples
+    (function(){
+      const key = 'lgpd-consent-v1';
+      const banner = document.getElementById('lgpd-banner');
+      const accept = document.getElementById('lgpd-consent');
+      const reject = document.getElementById('lgpd-accept');
+      if (!localStorage.getItem(key)) banner.classList.remove('hidden');
+      accept.addEventListener('click', ()=>{ localStorage.setItem(key,'accepted'); banner.classList.add('hidden'); });
+      reject.addEventListener('click', ()=>{ localStorage.setItem(key,'rejected'); banner.classList.add('hidden'); });
+    })();
+
+    // Validação simples do formulário + feedback
+    const form = document.getElementById('lead-form');
+    const msg  = document.getElementById('lead-msg');
+    form.addEventListener('submit', function(e){
+      if(!form.checkValidity()){
+        e.preventDefault();
+        msg.textContent = 'Por favor, preencha os campos obrigatórios e aceite a política.';
+        msg.className = 'mt-3 text-sm text-red-600';
+      } else {
+        msg.textContent = 'Enviado! Obrigado. Entraremos em contato em breve.';
+        msg.className = 'mt-3 text-sm text-emerald-600';
+      }
+    });
+  </script>
+</body>
+</html>
