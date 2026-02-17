@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Capacity TLV — Teste</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:20px}
+    .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+    button{padding:10px 12px;border:1px solid #ccc;border-radius:10px;background:#f7f7f7;cursor:pointer}
+    button:active{transform:translateY(1px)}
+    .badge{padding:6px 10px;border-radius:999px;border:1px solid #ddd;background:#fafafa}
+    .ok{border-color:#b7f0d1;background:#f1fff7}
+    .bad{border-color:#ffc1c1;background:#fff4f4}
+    table{width:100%;border-collapse:collapse;margin-top:12px}
+    th,td{border-bottom:1px solid #eee;padding:10px;text-align:left;font-size:14px}
+    th{background:#fafafa;position:sticky;top:0}
+    pre{background:#0b1220;color:#e8eefc;padding:12px;border-radius:12px;overflow:auto;max-height:320px}
+    .muted{color:#666;font-size:13px}
+  </style>
+</head>
+<body>
+
+  <h2>Capacity TLV — Teste</h2>
+
+  <div class="row">
+    <button id="btn">Carregar</button>
+    <span id="status" class="badge">Pronto</span>
+    <span class="muted" id="meta"></span>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Supervisor</th>
+        <th>Nome</th>
+        <th>Agente Vonix</th>
+        <th>Produto</th>
+      </tr>
+    </thead>
+    <tbody id="tbody">
+      <tr><td colspan="4" class="muted">Clique em “Carregar”.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>JSON bruto</h3>
+  <pre id="raw">(vazio)</pre>
+
+<script>
+  const ENDPOINT = "https://ophthalmic-stefany-semiempirical.ngrok-free.dev/SRVW-MIS-01/capacity_tlv";
+  const TOKEN = "token_maquina_mis_1_ajfaiufhurfnj298547648781349u583498913094u9";
+
+  const $ = (id) => document.getElementById(id);
+
+  function setStatus(type, text){
+    const el = $("status");
+    el.className = "badge " + (type || "");
+    el.textContent = text;
+  }
+
+  function escapeHtml(str){
+    return (str ?? "").toString()
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+  function normRow(r){
+    return {
+      supervisor: (r.supervisor ?? "").toString().trim(),
+      nome: (r.nome ?? "").toString().trim(),
+      agente_vonix: Number(r.agente_vonix ?? NaN),
+      produto: (r.produto ?? "").toString().replace(/\r/g,"").trim()
+    };
+  }
+
+  async function carregar(){
+    setStatus("", "Carregando...");
+    $("meta").textContent = "";
+    $("raw").textContent = "(carregando...)";
+
+    try{
+      const res = await fetch(ENDPOINT, {
+        method: "GET",
+        headers: {
+          "Accept": "application/json",
+          "Authorization": "Bearer " + TOKEN,
+          // opcional: ajuda quando o ngrok mostra warning no browser
+          "ngrok-skip-browser-warning": "true"
+        }
+      });
+
+      if (!res.ok){
+        const txt = await res.text().catch(() => "");
+        throw new Error(`HTTP ${res.status} ${res.statusText}\n${txt}`);
+      }
+
+      const data = await res.json();
+      if (!Array.isArray(data)) throw new Error("Resposta não é um array JSON.");
+
+      const rows = data.map(normRow);
+
+      $("meta").textContent = `Endpoint: ${ENDPOINT} — Registros: ${rows.length}`;
+      $("raw").textContent = JSON.stringify(data, null, 2);
+
+      const tbody = $("tbody");
+      if (!rows.length){
+        tbody.innerHTML = `<tr><td colspan="4" class="muted">Sem registros.</td></tr>`;
+      } else {
+        tbody.innerHTML = rows.map(r => `
+          <tr>
+            <td>${escapeHtml(r.supervisor || "—")}</td>
+            <td>${escapeHtml(r.nome || "—")}</td>
+            <td>${Number.isFinite(r.agente_vonix) ? r.agente_vonix : "—"}</td>
+            <td>${escapeHtml(r.produto || "—")}</td>
+          </tr>
+        `).join("");
+      }
+
+      setStatus("ok", "OK");
+    }catch(err){
+      setStatus("bad", "Erro");
+      $("raw").textContent = (err && err.message) ? err.message : String(err);
+      $("tbody").innerHTML = `<tr><td colspan="4" class="muted">Falha ao carregar (veja o erro no JSON bruto).</td></tr>`;
+    }
+  }
+
+  $("btn").addEventListener("click", carregar);
+
+  // auto-carregar ao abrir
+  carregar();
+</script>
+
+</body>
+</html>
